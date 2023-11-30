@@ -1,0 +1,5 @@
+/build
+/src
+/release/osx/arm64
+/release/osx/x64
+.DS_Store

@@ -24,7 +24,8 @@ my @libs = `cd x64/lib; ls *.a`;
 execute ("rm -rf universal");
 execute ("mkdir -p universal/lib");
 execute ("cp -r arm64/include universal");
-execute ("cp -r arm64/include arm64/share universal");
+execute ("cp -r arm64/share universal");
+execute ("cp -r arm64/cmake_platforms universal");
 
 foreach my $lib (@libs)
 {

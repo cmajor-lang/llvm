@@ -142,6 +142,22 @@ sub cloneLLVM()
     execute ("cd ${sourceDir}; git checkout $llvmBranch");
 }
 
+sub generateCmakePlatforms()
+{
+    my $platforms;
+
+    if ($targetsToBuild =~ m/AArch64/)      { $platforms .= "set (LLVM_INCLUDE_PLATFORM_ARM64 ON)\n"; }
+    if ($targetsToBuild =~ m/X86/)          { $platforms .= "set (LLVM_INCLUDE_PLATFORM_X64 ON)\n"; }
+    if ($targetsToBuild =~ m/ARM/)          { $platforms .= "set (LLVM_INCLUDE_PLATFORM_ARM32 ON)\n"; }
+    if ($targetsToBuild =~ m/WebAssembly/)  { $platforms .= "set (LLVM_INCLUDE_PLATFORM_WASM ON)\n"; }
+    if ($targetsToBuild =~ m/Hexagon/)      { $platforms .= "set (LLVM_INCLUDE_PLATFORM_HEXAGON ON)\n"; }
+    if ($targetsToBuild =~ m/RISCV/)        { $platforms .= "set (LLVM_INCLUDE_PLATFORM_RISCV ON)\n"; }
+
+    open (P, ">", "${releaseDir}/cmake_platforms");
+    print P $platforms;
+    close (P);
+}
+
 sub buildLLVM()
 {
     execute ("mkdir -p ${buildDir}");
@@ -157,4 +173,5 @@ if (! defined $skipCheckout)
     cloneLLVM();
 }
 
+generateCmakePlatforms();
 buildLLVM();

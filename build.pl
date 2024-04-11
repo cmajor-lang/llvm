@@ -18,6 +18,7 @@ my $buildTools       = "OFF";
 my $ndk;
 my $androidVersion   = "26";
 my $verbose;
+my $cmakePrefix      = "";
 
 if ($architecture eq "x86_64")
 {
@@ -45,11 +46,25 @@ if (defined $ndk)
     }
     else
     {
-        printf "Unsupported architecture (${$architecture}) on Android";
+        print "Unsupported architecture (${$architecture}) on Android\n";
         exit (1);
     }
 
     $cmakeExtraArgs = "-DCMAKE_SYSTEM_NAME=Android -DCMAKE_SYSTEM_VERSION=${androidVersion} -DCMAKE_ANDROID_ARCH_ABI=${abi} -DCMAKE_ANDROID_NDK=${ndk} -DANDROID_ALLOW_UNDEFINED_SYMBOLS=ON";
+}
+elsif ($platform eq "wasm")
+{
+    if ($hostOS ne "Linux")
+    {
+        print "wasm/empscripten build only works on linux for now\n";
+        exit (1);
+    }
+
+    print "Building with emscripten\n";
+    $architecture = "wasm32";
+    $targetsToBuild = "WebAssembly";
+    $cmakePrefix = 'CXXFLAGS="-Dwait4=__syscall_wait4" emcmake';
+    $cmakeExtraArgs = "-DLLVM_TABLEGEN=${rootDir}/release/linux/x64/bin/llvm-tblgen -DCMAKE_CROSSCOMPILING=True -DLLVM_DEFAULT_TARGET_TRIPLE=wasm32-wasi -DLLVM_ENABLE_THREADS=OFF -DLLVM_ENABLE_BACKTRACES=OFF -DLLVM_ENABLE_UNWIND_TABLES=OFF -DLLVM_ENABLE_CRASH_OVERRIDES=OFF -DLLVM_ENABLE_LIBXML2=OFF -DLLVM_ENABLE_LIBEDIT=OFF -DLLVM_ENABLE_LIBPFM=OFF -DLLVM_BUILD_STATIC=ON -DCMAKE_SKIP_RPATH=ON -DCMAKE_SKIP_INSTALL_RPATH=ON -DLLVM_ENABLE_PIC=OFF -DLLVM_ENABLE_ZLIB=OFF";
 }
 elsif ($hostOS eq "Linux")
 {
@@ -164,7 +179,8 @@ sub buildLLVM()
     execute ("mkdir -p ${releaseDir}");
 
     setDir ("${buildDir}");
-    execute ("cmake -G \"${cmakeBuildSystem}\" -DCMAKE_BUILD_TYPE=${buildType} -DLLVM_ENABLE_ZSTD=OFF -DLLVM_ENABLE_ASSERTIONS=ON -DLLVM_ENABLE_RTTI=ON -DLLVM_INCLUDE_EXAMPLES=OFF -DLLVM_INCLUDE_TESTS=OFF -DLLVM_INCLUDE_DOCS=OFF -DLLVM_TARGETS_TO_BUILD=\"${targetsToBuild}\" -DLLVM_ENABLE_PROJECTS=\"llvm;polly\" -DLLVM_ENABLE_TERMINFO=OFF -DLLVM_INSTALL_UTILS=OFF -DLLVM_BUILD_TOOLS=${buildTools} -DCMAKE_INSTALL_PREFIX=${releaseDir} ${cmakeExtraArgs} ${sourceDir}/llvm");
+
+    execute ("${cmakePrefix} cmake -G \"${cmakeBuildSystem}\" -DCMAKE_BUILD_TYPE=${buildType} -DLLVM_ENABLE_ZSTD=OFF -DLLVM_ENABLE_ASSERTIONS=ON -DLLVM_ENABLE_RTTI=ON -DLLVM_INCLUDE_EXAMPLES=OFF -DLLVM_INCLUDE_TESTS=OFF -DLLVM_INCLUDE_DOCS=OFF -DLLVM_TARGETS_TO_BUILD=\"${targetsToBuild}\" -DLLVM_ENABLE_PROJECTS=\"llvm;polly\" -DLLVM_ENABLE_TERMINFO=OFF -DLLVM_INSTALL_UTILS=OFF -DLLVM_BUILD_TOOLS=${buildTools} -DCMAKE_INSTALL_PREFIX=${releaseDir} ${cmakeExtraArgs} ${sourceDir}/llvm");
     execute ("cmake --build . --config ${buildType} --target install");
 }
 
@@ -173,5 +189,5 @@ if (! defined $skipCheckout)
     cloneLLVM();
 }
 
-generateCmakePlatforms();
 buildLLVM();
+generateCmakePlatforms();

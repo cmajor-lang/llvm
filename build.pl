@@ -21,6 +21,7 @@ my $verbose;
 my $cmakePrefix      = "";
 my $enableAssertions = "ON";
 my $enableRTTI       = "ON";
+my $projectsToBuild  = "llvm;polly";
 
 if ($architecture eq "x86_64")
 {
@@ -69,6 +70,7 @@ elsif ($platform eq "wasm")
     $cmakeExtraArgs = "-DLLVM_TABLEGEN=${rootDir}/release/linux/x64/bin/llvm-tblgen -DCMAKE_CROSSCOMPILING=True -DLLVM_DEFAULT_TARGET_TRIPLE=wasm32-wasi -DLLVM_ENABLE_THREADS=OFF -DLLVM_ENABLE_BACKTRACES=OFF -DLLVM_ENABLE_UNWIND_TABLES=OFF -DLLVM_ENABLE_CRASH_OVERRIDES=OFF -DLLVM_ENABLE_LIBXML2=OFF -DLLVM_ENABLE_LIBEDIT=OFF -DLLVM_ENABLE_LIBPFM=OFF -DLLVM_BUILD_STATIC=ON -DCMAKE_SKIP_RPATH=ON -DCMAKE_SKIP_INSTALL_RPATH=ON -DLLVM_ENABLE_PIC=OFF -DLLVM_ENABLE_ZLIB=OFF";
     $enableAssertions = "OFF";
     $enableRTTI = "OFF";
+    $projectsToBuild = "llvm";
 }
 elsif ($hostOS eq "Linux")
 {
@@ -184,7 +186,7 @@ sub buildLLVM()
 
     setDir ("${buildDir}");
 
-    execute ("${cmakePrefix} cmake -G \"${cmakeBuildSystem}\" -DCMAKE_BUILD_TYPE=${buildType} -DLLVM_ENABLE_ZSTD=OFF -DLLVM_ENABLE_ASSERTIONS=${enableAssertions} -DLLVM_ENABLE_RTTI=${enableRTTI} -DLLVM_INCLUDE_EXAMPLES=OFF -DLLVM_INCLUDE_TESTS=OFF -DLLVM_INCLUDE_DOCS=OFF -DLLVM_TARGETS_TO_BUILD=\"${targetsToBuild}\" -DLLVM_ENABLE_PROJECTS=\"llvm;polly\" -DLLVM_ENABLE_TERMINFO=OFF -DLLVM_INSTALL_UTILS=OFF -DLLVM_BUILD_TOOLS=${buildTools} -DCMAKE_INSTALL_PREFIX=${releaseDir} ${cmakeExtraArgs} ${sourceDir}/llvm");
+    execute ("${cmakePrefix} cmake -G \"${cmakeBuildSystem}\" -DCMAKE_BUILD_TYPE=${buildType} -DLLVM_ENABLE_ZSTD=OFF -DLLVM_ENABLE_ASSERTIONS=${enableAssertions} -DLLVM_ENABLE_RTTI=${enableRTTI} -DLLVM_INCLUDE_EXAMPLES=OFF -DLLVM_INCLUDE_TESTS=OFF -DLLVM_INCLUDE_DOCS=OFF -DLLVM_TARGETS_TO_BUILD=\"${targetsToBuild}\" -DLLVM_ENABLE_PROJECTS=\"${projectsToBuild}\" -DLLVM_ENABLE_TERMINFO=OFF -DLLVM_INSTALL_UTILS=OFF -DLLVM_BUILD_TOOLS=${buildTools} -DCMAKE_INSTALL_PREFIX=${releaseDir} ${cmakeExtraArgs} ${sourceDir}/llvm");
     execute ("cmake --build . --config ${buildType} --target install");
 }
 

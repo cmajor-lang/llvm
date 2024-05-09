@@ -22,6 +22,7 @@ my $cmakePrefix      = "";
 my $enableAssertions = "ON";
 my $enableRTTI       = "ON";
 my $projectsToBuild  = "llvm;polly";
+my $staticRuntime;
 
 if ($architecture eq "x86_64")
 {
@@ -36,7 +37,8 @@ GetOptions ("build-type=s"     => \$buildType,
             "verbose"          => \$verbose,
             "NDK=s"            => \$ndk,
             "androidVersion=s" => \$androidVersion,
-            "build-tools=s"    => \$buildTools);
+            "build-tools=s"    => \$buildTools,
+            "static-runtime"   => \$staticRuntime);
 
 if (defined $ndk)
 {
@@ -113,6 +115,12 @@ elsif (substr ($hostOS, 0, 9) eq "CYGWIN_NT")
     else
     {
         $cmakeExtraArgs = "-Thost=x64";
+    }
+
+    if ($staticRuntime)
+    {
+        $cmakeExtraArgs .= " -DLLVM_USE_CRT_RELEASE=MT";
+        $platform = "win-static";
     }
 }
 else

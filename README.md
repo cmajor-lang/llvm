@@ -11,8 +11,8 @@ The builds were generated using the `build.pl` script included in this repositor
 To build for OSX run (on an ARM64 machine), we build both the x64 and arm64 versions, then use `lipo` to merge the library files to create universal libraries:
 
 ```
-> ./build.pl /usr/bin/arch -x86_64
-> ./build.pl --skip-checkout
+> ./build.pl
+> /usr/bin/arch -x86_64 ./build.pl --skip-checkout
 > cd release/osx
 > ./lipo.pl
 ```

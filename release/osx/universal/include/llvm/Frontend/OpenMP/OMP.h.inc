@@ -11,6 +11,7 @@ LLVM_ENABLE_BITMASK_ENUMS_IN_NAMESPACE();
 
 enum class Directive {
   OMPD_allocate,
+  OMPD_allocators,
   OMPD_assumes,
   OMPD_atomic,
   OMPD_barrier,
@@ -42,6 +43,7 @@ enum class Directive {
   OMPD_end_sections,
   OMPD_end_single,
   OMPD_end_workshare,
+  OMPD_error,
   OMPD_flush,
   OMPD_for,
   OMPD_for_simd,
@@ -113,14 +115,16 @@ enum class Directive {
   OMPD_loop,
   OMPD_masked,
   OMPD_parallel_loop,
+  OMPD_scope,
   OMPD_target_parallel_loop,
   OMPD_target_teams_loop,
   OMPD_teams_loop,
 };
 
-static constexpr std::size_t Directive_enumSize = 106;
+static constexpr std::size_t Directive_enumSize = 109;
 
 constexpr auto OMPD_allocate = llvm::omp::Directive::OMPD_allocate;
+constexpr auto OMPD_allocators = llvm::omp::Directive::OMPD_allocators;
 constexpr auto OMPD_assumes = llvm::omp::Directive::OMPD_assumes;
 constexpr auto OMPD_atomic = llvm::omp::Directive::OMPD_atomic;
 constexpr auto OMPD_barrier = llvm::omp::Directive::OMPD_barrier;
@@ -152,6 +156,7 @@ constexpr auto OMPD_end_do_simd = llvm::omp::Directive::OMPD_end_do_simd;
 constexpr auto OMPD_end_sections = llvm::omp::Directive::OMPD_end_sections;
 constexpr auto OMPD_end_single = llvm::omp::Directive::OMPD_end_single;
 constexpr auto OMPD_end_workshare = llvm::omp::Directive::OMPD_end_workshare;
+constexpr auto OMPD_error = llvm::omp::Directive::OMPD_error;
 constexpr auto OMPD_flush = llvm::omp::Directive::OMPD_flush;
 constexpr auto OMPD_for = llvm::omp::Directive::OMPD_for;
 constexpr auto OMPD_for_simd = llvm::omp::Directive::OMPD_for_simd;
@@ -223,6 +228,7 @@ constexpr auto OMPD_interop = llvm::omp::Directive::OMPD_interop;
 constexpr auto OMPD_loop = llvm::omp::Directive::OMPD_loop;
 constexpr auto OMPD_masked = llvm::omp::Directive::OMPD_masked;
 constexpr auto OMPD_parallel_loop = llvm::omp::Directive::OMPD_parallel_loop;
+constexpr auto OMPD_scope = llvm::omp::Directive::OMPD_scope;
 constexpr auto OMPD_target_parallel_loop = llvm::omp::Directive::OMPD_target_parallel_loop;
 constexpr auto OMPD_target_teams_loop = llvm::omp::Directive::OMPD_target_teams_loop;
 constexpr auto OMPD_teams_loop = llvm::omp::Directive::OMPD_teams_loop;
@@ -237,6 +243,7 @@ enum class Clause {
   OMPC_allocate,
   OMPC_allocator,
   OMPC_append_args,
+  OMPC_at,
   OMPC_atomic_default_mem_order,
   OMPC_bind,
   OMPC_cancellation_construct_type,
@@ -254,8 +261,11 @@ enum class Clause {
   OMPC_device,
   OMPC_device_type,
   OMPC_dist_schedule,
+  OMPC_doacross,
   OMPC_dynamic_allocators,
+  OMPC_enter,
   OMPC_exclusive,
+  OMPC_fail,
   OMPC_filter,
   OMPC_final,
   OMPC_firstprivate,
@@ -279,6 +289,7 @@ enum class Clause {
   OMPC_match,
   OMPC_memory_order,
   OMPC_mergeable,
+  OMPC_message,
   OMPC_nogroup,
   OMPC_nowait,
   OMPC_nocontext,
@@ -288,6 +299,9 @@ enum class Clause {
   OMPC_num_tasks,
   OMPC_num_teams,
   OMPC_num_threads,
+  OMPC_ompx_attribute,
+  OMPC_ompx_dyn_cgroup_mem,
+  OMPC_ompx_bare,
   OMPC_order,
   OMPC_ordered,
   OMPC_partial,
@@ -302,6 +316,7 @@ enum class Clause {
   OMPC_safelen,
   OMPC_schedule,
   OMPC_seq_cst,
+  OMPC_severity,
   OMPC_shared,
   OMPC_simd,
   OMPC_simdlen,
@@ -325,7 +340,7 @@ enum class Clause {
   OMPC_write,
 };
 
-static constexpr std::size_t Clause_enumSize = 95;
+static constexpr std::size_t Clause_enumSize = 104;
 
 constexpr auto OMPC_acq_rel = llvm::omp::Clause::OMPC_acq_rel;
 constexpr auto OMPC_acquire = llvm::omp::Clause::OMPC_acquire;
@@ -336,6 +351,7 @@ constexpr auto OMPC_aligned = llvm::omp::Clause::OMPC_aligned;
 constexpr auto OMPC_allocate = llvm::omp::Clause::OMPC_allocate;
 constexpr auto OMPC_allocator = llvm::omp::Clause::OMPC_allocator;
 constexpr auto OMPC_append_args = llvm::omp::Clause::OMPC_append_args;
+constexpr auto OMPC_at = llvm::omp::Clause::OMPC_at;
 constexpr auto OMPC_atomic_default_mem_order = llvm::omp::Clause::OMPC_atomic_default_mem_order;
 constexpr auto OMPC_bind = llvm::omp::Clause::OMPC_bind;
 constexpr auto OMPC_cancellation_construct_type = llvm::omp::Clause::OMPC_cancellation_construct_type;
@@ -353,8 +369,11 @@ constexpr auto OMPC_detach = llvm::omp::Clause::OMPC_detach;
 constexpr auto OMPC_device = llvm::omp::Clause::OMPC_device;
 constexpr auto OMPC_device_type = llvm::omp::Clause::OMPC_device_type;
 constexpr auto OMPC_dist_schedule = llvm::omp::Clause::OMPC_dist_schedule;
+constexpr auto OMPC_doacross = llvm::omp::Clause::OMPC_doacross;
 constexpr auto OMPC_dynamic_allocators = llvm::omp::Clause::OMPC_dynamic_allocators;
+constexpr auto OMPC_enter = llvm::omp::Clause::OMPC_enter;
 constexpr auto OMPC_exclusive = llvm::omp::Clause::OMPC_exclusive;
+constexpr auto OMPC_fail = llvm::omp::Clause::OMPC_fail;
 constexpr auto OMPC_filter = llvm::omp::Clause::OMPC_filter;
 constexpr auto OMPC_final = llvm::omp::Clause::OMPC_final;
 constexpr auto OMPC_firstprivate = llvm::omp::Clause::OMPC_firstprivate;
@@ -378,6 +397,7 @@ constexpr auto OMPC_map = llvm::omp::Clause::OMPC_map;
 constexpr auto OMPC_match = llvm::omp::Clause::OMPC_match;
 constexpr auto OMPC_memory_order = llvm::omp::Clause::OMPC_memory_order;
 constexpr auto OMPC_mergeable = llvm::omp::Clause::OMPC_mergeable;
+constexpr auto OMPC_message = llvm::omp::Clause::OMPC_message;
 constexpr auto OMPC_nogroup = llvm::omp::Clause::OMPC_nogroup;
 constexpr auto OMPC_nowait = llvm::omp::Clause::OMPC_nowait;
 constexpr auto OMPC_nocontext = llvm::omp::Clause::OMPC_nocontext;
@@ -387,6 +407,9 @@ constexpr auto OMPC_novariants = llvm::omp::Clause::OMPC_novariants;
 constexpr auto OMPC_num_tasks = llvm::omp::Clause::OMPC_num_tasks;
 constexpr auto OMPC_num_teams = llvm::omp::Clause::OMPC_num_teams;
 constexpr auto OMPC_num_threads = llvm::omp::Clause::OMPC_num_threads;
+constexpr auto OMPC_ompx_attribute = llvm::omp::Clause::OMPC_ompx_attribute;
+constexpr auto OMPC_ompx_dyn_cgroup_mem = llvm::omp::Clause::OMPC_ompx_dyn_cgroup_mem;
+constexpr auto OMPC_ompx_bare = llvm::omp::Clause::OMPC_ompx_bare;
 constexpr auto OMPC_order = llvm::omp::Clause::OMPC_order;
 constexpr auto OMPC_ordered = llvm::omp::Clause::OMPC_ordered;
 constexpr auto OMPC_partial = llvm::omp::Clause::OMPC_partial;
@@ -401,6 +424,7 @@ constexpr auto OMPC_reverse_offload = llvm::omp::Clause::OMPC_reverse_offload;
 constexpr auto OMPC_safelen = llvm::omp::Clause::OMPC_safelen;
 constexpr auto OMPC_schedule = llvm::omp::Clause::OMPC_schedule;
 constexpr auto OMPC_seq_cst = llvm::omp::Clause::OMPC_seq_cst;
+constexpr auto OMPC_severity = llvm::omp::Clause::OMPC_severity;
 constexpr auto OMPC_shared = llvm::omp::Clause::OMPC_shared;
 constexpr auto OMPC_simd = llvm::omp::Clause::OMPC_simd;
 constexpr auto OMPC_simdlen = llvm::omp::Clause::OMPC_simdlen;
@@ -437,6 +461,14 @@ constexpr auto OMP_CANCELLATION_CONSTRUCT_Sections = llvm::omp::CancellationCons
 constexpr auto OMP_CANCELLATION_CONSTRUCT_Taskgroup = llvm::omp::CancellationConstructType::OMP_CANCELLATION_CONSTRUCT_Taskgroup;
 constexpr auto OMP_CANCELLATION_CONSTRUCT_None = llvm::omp::CancellationConstructType::OMP_CANCELLATION_CONSTRUCT_None;
 
+enum class GrainsizeType {
+  OMP_GRAINSIZE_Strict=1,
+  OMP_GRAINSIZE_Unknown=2,
+};
+
+constexpr auto OMP_GRAINSIZE_Strict = llvm::omp::GrainsizeType::OMP_GRAINSIZE_Strict;
+constexpr auto OMP_GRAINSIZE_Unknown = llvm::omp::GrainsizeType::OMP_GRAINSIZE_Unknown;
+
 enum class MemoryOrderKind {
   OMP_MEMORY_ORDER_SeqCst=1,
   OMP_MEMORY_ORDER_AcqRel=2,
@@ -452,6 +484,14 @@ constexpr auto OMP_MEMORY_ORDER_Acquire = llvm::omp::MemoryOrderKind::OMP_MEMORY
 constexpr auto OMP_MEMORY_ORDER_Release = llvm::omp::MemoryOrderKind::OMP_MEMORY_ORDER_Release;
 constexpr auto OMP_MEMORY_ORDER_Relaxed = llvm::omp::MemoryOrderKind::OMP_MEMORY_ORDER_Relaxed;
 constexpr auto OMP_MEMORY_ORDER_Default = llvm::omp::MemoryOrderKind::OMP_MEMORY_ORDER_Default;
+
+enum class NumTasksType {
+  OMP_NUMTASKS_Strict=1,
+  OMP_NUMTASKS_Unknown=2,
+};
+
+constexpr auto OMP_NUMTASKS_Strict = llvm::omp::NumTasksType::OMP_NUMTASKS_Strict;
+constexpr auto OMP_NUMTASKS_Unknown = llvm::omp::NumTasksType::OMP_NUMTASKS_Unknown;
 
 enum class OrderKind {
   OMP_ORDER_unknown=2,
@@ -507,8 +547,12 @@ bool isAllowedClauseForDirective(Directive D, Clause C, unsigned Version);
 
 CancellationConstructType getCancellationConstructType(StringRef);
 llvm::StringRef getOpenMPCancellationConstructTypeName(CancellationConstructType);
+GrainsizeType getGrainsizeType(StringRef);
+llvm::StringRef getOpenMPGrainsizeTypeName(GrainsizeType);
 MemoryOrderKind getMemoryOrderKind(StringRef);
 llvm::StringRef getOpenMPMemoryOrderKindName(MemoryOrderKind);
+NumTasksType getNumTasksType(StringRef);
+llvm::StringRef getOpenMPNumTasksTypeName(NumTasksType);
 OrderKind getOrderKind(StringRef);
 llvm::StringRef getOpenMPOrderKindName(OrderKind);
 ProcBindKind getProcBindKind(StringRef);

@@ -4,7 +4,7 @@ use strict;
 use Getopt::Long;
 
 my $llvmRepo         = "https://github.com/llvm/llvm-project.git";
-my $llvmBranch       = "release/15.x";
+my $llvmBranch       = "release/18.x";
 my $buildType        = "Release";
 my $cmakeExtraArgs   = "";
 my $skipCheckout;

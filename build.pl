@@ -21,7 +21,7 @@ my $verbose;
 my $cmakePrefix      = "";
 my $enableAssertions = "ON";
 my $enableRTTI       = "ON";
-my $projectsToBuild  = "llvm;polly";
+my $projectsToBuild  = "llvm";
 my $staticRuntime;
 
 if ($architecture eq "x86_64")

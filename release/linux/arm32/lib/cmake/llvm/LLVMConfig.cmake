@@ -157,9 +157,9 @@ set_property(GLOBAL PROPERTY LLVMBUILD_LIB_DEPS_LLVMExegesis )
 set_property(GLOBAL PROPERTY LLVMBUILD_LIB_DEPS_Remarks )
 set_property(GLOBAL PROPERTY LLVMBUILD_LIB_DEPS_Polly )
 
-set(LLVM_TARGET_TRIPLE "armv7l-linux-gnueabihf")
+set(LLVM_TARGET_TRIPLE "armv7l-unknown-linux-gnueabihf")
 
-set(LLVM_HOST_TRIPLE "armv7l-linux-gnueabihf")
+set(LLVM_HOST_TRIPLE "armv7l-unknown-linux-gnueabihf")
 
 set(LLVM_ABI_BREAKING_CHECKS WITH_ASSERTS)
 
@@ -192,7 +192,7 @@ set(LLVM_ENABLE_THREADS ON)
 
 set(LLVM_ENABLE_UNWIND_TABLES ON)
 
-set(LLVM_ENABLE_ZLIB )
+set(LLVM_ENABLE_ZLIB 1)
 if(LLVM_ENABLE_ZLIB)
   set(ZLIB_ROOT )
   find_package(ZLIB)
@@ -203,7 +203,7 @@ if(LLVM_ENABLE_ZSTD)
   find_package(zstd)
 endif()
 
-set(LLVM_ENABLE_LIBXML2 )
+set(LLVM_ENABLE_LIBXML2 1)
 if(LLVM_ENABLE_LIBXML2)
   find_package(LibXml2)
 endif()
@@ -265,7 +265,7 @@ set(LLVM_HAVE_OPT_VIEWER_MODULES 0)
 set(LLVM_CONFIGURATION_TYPES )
 set(LLVM_ENABLE_SHARED_LIBS OFF)
 
-set(LLVM_DEFAULT_EXTERNAL_LIT "/scratch/jenkins/llvm/build/linux/arm32/./bin/llvm-lit")
+set(LLVM_DEFAULT_EXTERNAL_LIT "/mnt/sda2/jenkins/llvm/build/linux/armv7l/./bin/llvm-lit")
 set(LLVM_LIT_ARGS "-sv")
 
 if(NOT TARGET LLVMSupport)

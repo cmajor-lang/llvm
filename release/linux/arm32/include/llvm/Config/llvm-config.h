@@ -19,7 +19,7 @@
 
 /* Target triple LLVM will generate code for by default */
 /* Doesn't use `cmakedefine` because it is allowed to be empty. */
-#define LLVM_DEFAULT_TARGET_TRIPLE "armv7l-linux-gnueabihf"
+#define LLVM_DEFAULT_TARGET_TRIPLE "armv7l-unknown-linux-gnueabihf"
 
 /* Define if threads enabled */
 #define LLVM_ENABLE_THREADS 1
@@ -28,7 +28,7 @@
 #define LLVM_HAS_ATOMICS 1
 
 /* Host triple LLVM will be executed on */
-#define LLVM_HOST_TRIPLE "armv7l-linux-gnueabihf"
+#define LLVM_HOST_TRIPLE "armv7l-unknown-linux-gnueabihf"
 
 /* LLVM architecture name for the native architecture, if available */
 #define LLVM_NATIVE_ARCH ARM
@@ -168,7 +168,7 @@
 /* #undef LLVM_ENABLE_HTTPLIB */
 
 /* Define if zlib compression is available */
-#define LLVM_ENABLE_ZLIB 0
+#define LLVM_ENABLE_ZLIB 1
 
 /* Define if zstd compression is available */
 #define LLVM_ENABLE_ZSTD 0

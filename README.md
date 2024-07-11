@@ -11,8 +11,8 @@ The builds were generated using the `build.pl` script included in this repositor
 To build for OSX run (on an ARM64 machine), we build both the x64 and arm64 versions, then use `lipo` to merge the library files to create universal libraries:
 
 ```
-> ./build.pl /usr/bin/arch -x86_64
-> ./build.pl --skip-checkout
+> ./build.pl
+> /usr/bin/arch -x86_64 ./build.pl --skip-checkout
 > cd release/osx
 > ./lipo.pl
 ```
@@ -21,11 +21,15 @@ To build for OSX run (on an ARM64 machine), we build both the x64 and arm64 vers
 
 To build for windows, you need VS 2019 installed including the arm64 cross compiler option.
 
-Only the required targets for the two architectures are included.
+Only the required targets for the two architectures are included. We build additional runtimes for x86 to support static runtime, and static debug runtime
 
 ```
 > ./build.pl --targetsToBuild="X86;WebAssembly"
+> ./build.pl --targetsToBuild="X86;WebAssembly" --static-runtime
+> ./build.pl --targetsToBuild="X86;WebAssembly" --static-debug-runtime
 > ./build.pl --targetsToBuild="AArch64;WebAssembly" --skip-checkout --architecture=arm64
+> cd release/win
+> ./merge.pl
 ```
 
 ### Linux

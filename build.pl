@@ -4,7 +4,7 @@ use strict;
 use Getopt::Long;
 
 my $llvmRepo         = "https://github.com/llvm/llvm-project.git";
-my $llvmBranch       = "release/15.x";
+my $llvmBranch       = "release/18.x";
 my $buildType        = "Release";
 my $cmakeExtraArgs   = "";
 my $skipCheckout;
@@ -21,24 +21,26 @@ my $verbose;
 my $cmakePrefix      = "";
 my $enableAssertions = "ON";
 my $enableRTTI       = "ON";
-my $projectsToBuild  = "llvm;polly";
+my $projectsToBuild  = "llvm";
 my $staticRuntime;
+my $staticDebugRuntime;
 
 if ($architecture eq "x86_64")
 {
     $architecture = "x64";
 }
 
-GetOptions ("build-type=s"     => \$buildType,
-            "architecture=s"   => \$architecture,
-            "platform=s"       => \$platform,
-            "targetsToBuild=s" => \$targetsToBuild,
-            "skip-checkout"    => \$skipCheckout,
-            "verbose"          => \$verbose,
-            "NDK=s"            => \$ndk,
-            "androidVersion=s" => \$androidVersion,
-            "build-tools=s"    => \$buildTools,
-            "static-runtime"   => \$staticRuntime);
+GetOptions ("build-type=s"          => \$buildType,
+            "architecture=s"        => \$architecture,
+            "platform=s"            => \$platform,
+            "targetsToBuild=s"      => \$targetsToBuild,
+            "skip-checkout"         => \$skipCheckout,
+            "verbose"               => \$verbose,
+            "NDK=s"                 => \$ndk,
+            "androidVersion=s"      => \$androidVersion,
+            "build-tools=s"         => \$buildTools,
+            "static-runtime"        => \$staticRuntime,
+            "static-debug-runtime"  => \$staticDebugRuntime);
 
 if (defined $ndk)
 {
@@ -115,6 +117,12 @@ elsif (substr ($hostOS, 0, 9) eq "CYGWIN_NT")
     else
     {
         $cmakeExtraArgs = "-Thost=x64";
+    }
+
+    if ($staticDebugRuntime)
+    {
+        $cmakeExtraArgs .= " -DLLVM_USE_CRT_RELEASE=MTd";
+        $platform = "win-static-debug";
     }
 
     if ($staticRuntime)

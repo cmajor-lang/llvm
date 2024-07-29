@@ -121,13 +121,13 @@ elsif (substr ($hostOS, 0, 9) eq "CYGWIN_NT")
 
     if ($staticDebugRuntime)
     {
-        $cmakeExtraArgs .= " -DLLVM_USE_CRT_RELEASE=MTd";
+        $cmakeExtraArgs .= " -DCMAKE_MSVC_RUNTIME_LIBRARY=MultiThreaded -DLLVM_USE_CRT_RELEASE=MTd";
         $platform = "win-static-debug";
     }
 
     if ($staticRuntime)
     {
-        $cmakeExtraArgs .= " -DLLVM_USE_CRT_RELEASE=MT";
+        $cmakeExtraArgs .= " -DCMAKE_MSVC_RUNTIME_LIBRARY=MultiThreaded -DLLVM_USE_CRT_RELEASE=MT";
         $platform = "win-static";
     }
 }

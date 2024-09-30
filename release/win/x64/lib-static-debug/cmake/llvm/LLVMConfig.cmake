@@ -18,7 +18,7 @@ set(LLVM_PACKAGE_BUGREPORT https://github.com/llvm/llvm-project/issues/)
 
 set(LLVM_BUILD_TYPE Release)
 
-set(CMAKE_MSVC_RUNTIME_LIBRARY MultiThreaded)
+set(CMAKE_MSVC_RUNTIME_LIBRARY MultiThreadedDebug)
 
 set(LLVM_USE_SPLIT_DWARF OFF)
 

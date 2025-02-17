@@ -19,7 +19,7 @@
 
 /* Target triple LLVM will generate code for by default */
 /* Doesn't use `cmakedefine` because it is allowed to be empty. */
-#define LLVM_DEFAULT_TARGET_TRIPLE "arm64-apple-darwin23.5.0"
+#define LLVM_DEFAULT_TARGET_TRIPLE "arm64-apple-darwin23.6.0"
 
 /* Define if threads enabled */
 #define LLVM_ENABLE_THREADS 1
@@ -28,7 +28,7 @@
 #define LLVM_HAS_ATOMICS 1
 
 /* Host triple LLVM will be executed on */
-#define LLVM_HOST_TRIPLE "arm64-apple-darwin23.5.0"
+#define LLVM_HOST_TRIPLE "arm64-apple-darwin23.6.0"
 
 /* LLVM architecture name for the native architecture, if available */
 #define LLVM_NATIVE_ARCH AArch64
@@ -142,16 +142,16 @@
 #define LLVM_USE_PERF 0
 
 /* Major version of the LLVM API */
-#define LLVM_VERSION_MAJOR 18
+#define LLVM_VERSION_MAJOR 19
 
 /* Minor version of the LLVM API */
 #define LLVM_VERSION_MINOR 1
 
 /* Patch version of the LLVM API */
-#define LLVM_VERSION_PATCH 8
+#define LLVM_VERSION_PATCH 7
 
 /* LLVM version string */
-#define LLVM_VERSION_STRING "18.1.8"
+#define LLVM_VERSION_STRING "19.1.7"
 
 /* Whether LLVM records statistics for use with GetStatistics(),
  * PrintStatistics() or PrintStatisticsJSON()
@@ -197,5 +197,8 @@
 
 /* Define if plugins enabled */
 #define LLVM_ENABLE_PLUGINS
+
+/* Define if logf128 is available */
+/* #undef LLVM_HAS_LOGF128 */
 
 #endif

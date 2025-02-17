@@ -4,7 +4,7 @@ use strict;
 use Getopt::Long;
 
 my $llvmRepo         = "https://github.com/llvm/llvm-project.git";
-my $llvmBranch       = "release/18.x";
+my $llvmBranch       = "release/19.x";
 my $buildType        = "Release";
 my $cmakeExtraArgs   = "";
 my $skipCheckout;
@@ -18,6 +18,7 @@ my $buildTools       = "OFF";
 my $ndk;
 my $androidVersion   = "26";
 my $verbose;
+my $includePolly     = 1;
 my $cmakePrefix      = "";
 my $enableAssertions = "ON";
 my $enableRTTI       = "ON";
@@ -36,6 +37,7 @@ GetOptions ("build-type=s"          => \$buildType,
             "targetsToBuild=s"      => \$targetsToBuild,
             "skip-checkout"         => \$skipCheckout,
             "verbose"               => \$verbose,
+            "include-polly"         => \$includePolly,
             "NDK=s"                 => \$ndk,
             "androidVersion=s"      => \$androidVersion,
             "build-tools=s"         => \$buildTools,
@@ -137,6 +139,11 @@ else
     exit (1);
 }
 
+if ($includePolly)
+{
+    $projectsToBuild = "${projectsToBuild};polly";
+}
+
 if ($verbose)
 {
     $cmakeExtraArgs = $cmakeExtraArgs . " -DCMAKE_VERBOSE_MAKEFILE=ON";
@@ -189,6 +196,8 @@ sub generateCmakePlatforms()
     if ($targetsToBuild =~ m/WebAssembly/)  { $platforms .= "set (LLVM_INCLUDE_PLATFORM_WASM ON)\n"; }
     if ($targetsToBuild =~ m/Hexagon/)      { $platforms .= "set (LLVM_INCLUDE_PLATFORM_HEXAGON ON)\n"; }
     if ($targetsToBuild =~ m/RISCV/)        { $platforms .= "set (LLVM_INCLUDE_PLATFORM_RISCV ON)\n"; }
+
+    if ($projectsToBuild =~ m/polly/)        { $platforms .= "set (LLVM_INCLUDE_POLLY ON)\n"; }
 
     open (P, ">", "${releaseDir}/cmake_platforms");
     print P $platforms;

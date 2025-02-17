@@ -35,15 +35,15 @@ set_target_properties(LLVMTableGen PROPERTIES
 list(APPEND _cmake_import_check_targets LLVMTableGen )
 list(APPEND _cmake_import_check_files_for_LLVMTableGen "${_IMPORT_PREFIX}/lib/libLLVMTableGen.a" )
 
-# Import target "LLVMTableGenGlobalISel" for configuration "Release"
-set_property(TARGET LLVMTableGenGlobalISel APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
-set_target_properties(LLVMTableGenGlobalISel PROPERTIES
+# Import target "LLVMTableGenBasic" for configuration "Release"
+set_property(TARGET LLVMTableGenBasic APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
+set_target_properties(LLVMTableGenBasic PROPERTIES
   IMPORTED_LINK_INTERFACE_LANGUAGES_RELEASE "CXX"
-  IMPORTED_LOCATION_RELEASE "${_IMPORT_PREFIX}/lib/libLLVMTableGenGlobalISel.a"
+  IMPORTED_LOCATION_RELEASE "${_IMPORT_PREFIX}/lib/libLLVMTableGenBasic.a"
   )
 
-list(APPEND _cmake_import_check_targets LLVMTableGenGlobalISel )
-list(APPEND _cmake_import_check_files_for_LLVMTableGenGlobalISel "${_IMPORT_PREFIX}/lib/libLLVMTableGenGlobalISel.a" )
+list(APPEND _cmake_import_check_targets LLVMTableGenBasic )
+list(APPEND _cmake_import_check_files_for_LLVMTableGenBasic "${_IMPORT_PREFIX}/lib/libLLVMTableGenBasic.a" )
 
 # Import target "LLVMTableGenCommon" for configuration "Release"
 set_property(TARGET LLVMTableGenCommon APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
@@ -134,16 +134,6 @@ set_target_properties(LLVMIRReader PROPERTIES
 list(APPEND _cmake_import_check_targets LLVMIRReader )
 list(APPEND _cmake_import_check_files_for_LLVMIRReader "${_IMPORT_PREFIX}/lib/libLLVMIRReader.a" )
 
-# Import target "LLVMCodeGenTypes" for configuration "Release"
-set_property(TARGET LLVMCodeGenTypes APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
-set_target_properties(LLVMCodeGenTypes PROPERTIES
-  IMPORTED_LINK_INTERFACE_LANGUAGES_RELEASE "CXX"
-  IMPORTED_LOCATION_RELEASE "${_IMPORT_PREFIX}/lib/libLLVMCodeGenTypes.a"
-  )
-
-list(APPEND _cmake_import_check_targets LLVMCodeGenTypes )
-list(APPEND _cmake_import_check_files_for_LLVMCodeGenTypes "${_IMPORT_PREFIX}/lib/libLLVMCodeGenTypes.a" )
-
 # Import target "LLVMCodeGen" for configuration "Release"
 set_property(TARGET LLVMCodeGen APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
 set_target_properties(LLVMCodeGen PROPERTIES
@@ -193,6 +183,26 @@ set_target_properties(LLVMGlobalISel PROPERTIES
 
 list(APPEND _cmake_import_check_targets LLVMGlobalISel )
 list(APPEND _cmake_import_check_files_for_LLVMGlobalISel "${_IMPORT_PREFIX}/lib/libLLVMGlobalISel.a" )
+
+# Import target "LLVMCodeGenData" for configuration "Release"
+set_property(TARGET LLVMCodeGenData APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
+set_target_properties(LLVMCodeGenData PROPERTIES
+  IMPORTED_LINK_INTERFACE_LANGUAGES_RELEASE "CXX"
+  IMPORTED_LOCATION_RELEASE "${_IMPORT_PREFIX}/lib/libLLVMCodeGenData.a"
+  )
+
+list(APPEND _cmake_import_check_targets LLVMCodeGenData )
+list(APPEND _cmake_import_check_files_for_LLVMCodeGenData "${_IMPORT_PREFIX}/lib/libLLVMCodeGenData.a" )
+
+# Import target "LLVMCodeGenTypes" for configuration "Release"
+set_property(TARGET LLVMCodeGenTypes APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
+set_target_properties(LLVMCodeGenTypes PROPERTIES
+  IMPORTED_LINK_INTERFACE_LANGUAGES_RELEASE "CXX"
+  IMPORTED_LOCATION_RELEASE "${_IMPORT_PREFIX}/lib/libLLVMCodeGenTypes.a"
+  )
+
+list(APPEND _cmake_import_check_targets LLVMCodeGenTypes )
+list(APPEND _cmake_import_check_files_for_LLVMCodeGenTypes "${_IMPORT_PREFIX}/lib/libLLVMCodeGenTypes.a" )
 
 # Import target "LLVMBinaryFormat" for configuration "Release"
 set_property(TARGET LLVMBinaryFormat APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
@@ -994,6 +1004,16 @@ set_target_properties(LLVMWebAssemblyUtils PROPERTIES
 list(APPEND _cmake_import_check_targets LLVMWebAssemblyUtils )
 list(APPEND _cmake_import_check_files_for_LLVMWebAssemblyUtils "${_IMPORT_PREFIX}/lib/libLLVMWebAssemblyUtils.a" )
 
+# Import target "LLVMSandboxIR" for configuration "Release"
+set_property(TARGET LLVMSandboxIR APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
+set_target_properties(LLVMSandboxIR PROPERTIES
+  IMPORTED_LINK_INTERFACE_LANGUAGES_RELEASE "CXX"
+  IMPORTED_LOCATION_RELEASE "${_IMPORT_PREFIX}/lib/libLLVMSandboxIR.a"
+  )
+
+list(APPEND _cmake_import_check_targets LLVMSandboxIR )
+list(APPEND _cmake_import_check_files_for_LLVMSandboxIR "${_IMPORT_PREFIX}/lib/libLLVMSandboxIR.a" )
+
 # Import target "LLVMAsmParser" for configuration "Release"
 set_property(TARGET LLVMAsmParser APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
 set_target_properties(LLVMAsmParser PROPERTIES
@@ -1127,12 +1147,12 @@ list(APPEND _cmake_import_check_files_for_LLVMWindowsManifest "${_IMPORT_PREFIX}
 # Import target "LTO" for configuration "Release"
 set_property(TARGET LTO APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
 set_target_properties(LTO PROPERTIES
-  IMPORTED_LOCATION_RELEASE "${_IMPORT_PREFIX}/lib/libLTO.so.18.1"
-  IMPORTED_SONAME_RELEASE "libLTO.so.18.1"
+  IMPORTED_LOCATION_RELEASE "${_IMPORT_PREFIX}/lib/libLTO.so.19.1"
+  IMPORTED_SONAME_RELEASE "libLTO.so.19.1"
   )
 
 list(APPEND _cmake_import_check_targets LTO )
-list(APPEND _cmake_import_check_files_for_LTO "${_IMPORT_PREFIX}/lib/libLTO.so.18.1" )
+list(APPEND _cmake_import_check_files_for_LTO "${_IMPORT_PREFIX}/lib/libLTO.so.19.1" )
 
 # Import target "LLVMCFIVerify" for configuration "Release"
 set_property(TARGET LLVMCFIVerify APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
@@ -1184,15 +1204,25 @@ set_target_properties(LLVMExegesis PROPERTIES
 list(APPEND _cmake_import_check_targets LLVMExegesis )
 list(APPEND _cmake_import_check_files_for_LLVMExegesis "${_IMPORT_PREFIX}/lib/libLLVMExegesis.a" )
 
+# Import target "LLVMOptDriver" for configuration "Release"
+set_property(TARGET LLVMOptDriver APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
+set_target_properties(LLVMOptDriver PROPERTIES
+  IMPORTED_LINK_INTERFACE_LANGUAGES_RELEASE "CXX"
+  IMPORTED_LOCATION_RELEASE "${_IMPORT_PREFIX}/lib/libLLVMOptDriver.a"
+  )
+
+list(APPEND _cmake_import_check_targets LLVMOptDriver )
+list(APPEND _cmake_import_check_files_for_LLVMOptDriver "${_IMPORT_PREFIX}/lib/libLLVMOptDriver.a" )
+
 # Import target "Remarks" for configuration "Release"
 set_property(TARGET Remarks APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
 set_target_properties(Remarks PROPERTIES
-  IMPORTED_LOCATION_RELEASE "${_IMPORT_PREFIX}/lib/libRemarks.so.18.1"
-  IMPORTED_SONAME_RELEASE "libRemarks.so.18.1"
+  IMPORTED_LOCATION_RELEASE "${_IMPORT_PREFIX}/lib/libRemarks.so.19.1"
+  IMPORTED_SONAME_RELEASE "libRemarks.so.19.1"
   )
 
 list(APPEND _cmake_import_check_targets Remarks )
-list(APPEND _cmake_import_check_files_for_Remarks "${_IMPORT_PREFIX}/lib/libRemarks.so.18.1" )
+list(APPEND _cmake_import_check_files_for_Remarks "${_IMPORT_PREFIX}/lib/libRemarks.so.19.1" )
 
 # Import target "PollyISL" for configuration "Release"
 set_property(TARGET PollyISL APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)

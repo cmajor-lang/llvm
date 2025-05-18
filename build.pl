@@ -121,7 +121,7 @@ elsif (substr ($hostOS, 0, 9) eq "CYGWIN_NT")
 
     if ($staticDebugRuntime)
     {
-        $cmakeExtraArgs .= " -DCMAKE_MSVC_RUNTIME_LIBRARY=MultiThreaded -DLLVM_USE_CRT_RELEASE=MTd";
+        $cmakeExtraArgs .= " -DCMAKE_MSVC_RUNTIME_LIBRARY=MultiThreadedDebug -DLLVM_USE_CRT_RELEASE=MTd";
         $platform = "win-static-debug";
     }
 

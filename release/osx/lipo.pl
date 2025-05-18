@@ -23,9 +23,13 @@ my @libs = `cd x64/lib; ls *.a`;
 
 execute ("rm -rf universal");
 execute ("mkdir -p universal/lib");
+execute ("mkdir -p universal/lib/debug");
+execute ("mkdir -p universal/lib/release");
 execute ("cp -r arm64/include universal");
 execute ("cp -r arm64/share universal");
 execute ("cp -r arm64/cmake_platforms universal");
+execute ("echo avoid missing path warning >universal/lib/debug/dummy.txt");
+execute ("echo avoid missing path warning >universal/lib/release/dummy.txt");
 
 foreach my $lib (@libs)
 {

@@ -252,7 +252,7 @@ set(LLVM_HAVE_OPT_VIEWER_MODULES 0)
 set(LLVM_CONFIGURATION_TYPES Debug;Release;MinSizeRel;RelWithDebInfo)
 set(LLVM_ENABLE_SHARED_LIBS OFF)
 
-set(LLVM_DEFAULT_EXTERNAL_LIT "C:/cygwin64/home/cesare/cmajor-dev/cmajor/3rdParty/llvm/build/win-static/x64/$(Configuration)/bin/llvm-lit.py")
+set(LLVM_DEFAULT_EXTERNAL_LIT "C:/cygwin64/home/cesare/llvm/build/win-static/x64/$(Configuration)/bin/llvm-lit.py")
 set(LLVM_LIT_ARGS "-sv --no-progress-bar")
 
 if(NOT TARGET LLVMSupport)

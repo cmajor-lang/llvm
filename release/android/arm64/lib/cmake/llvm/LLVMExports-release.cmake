@@ -25,6 +25,16 @@ set_target_properties(LLVMSupport PROPERTIES
 list(APPEND _cmake_import_check_targets LLVMSupport )
 list(APPEND _cmake_import_check_files_for_LLVMSupport "${_IMPORT_PREFIX}/lib/libLLVMSupport.a" )
 
+# Import target "LLVMSupportLSP" for configuration "Release"
+set_property(TARGET LLVMSupportLSP APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
+set_target_properties(LLVMSupportLSP PROPERTIES
+  IMPORTED_LINK_INTERFACE_LANGUAGES_RELEASE "CXX"
+  IMPORTED_LOCATION_RELEASE "${_IMPORT_PREFIX}/lib/libLLVMSupportLSP.a"
+  )
+
+list(APPEND _cmake_import_check_targets LLVMSupportLSP )
+list(APPEND _cmake_import_check_files_for_LLVMSupportLSP "${_IMPORT_PREFIX}/lib/libLLVMSupportLSP.a" )
+
 # Import target "LLVMTableGen" for configuration "Release"
 set_property(TARGET LLVMTableGen APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
 set_target_properties(LLVMTableGen PROPERTIES
@@ -73,6 +83,16 @@ set_target_properties(LLVMCore PROPERTIES
 
 list(APPEND _cmake_import_check_targets LLVMCore )
 list(APPEND _cmake_import_check_files_for_LLVMCore "${_IMPORT_PREFIX}/lib/libLLVMCore.a" )
+
+# Import target "LLVMABI" for configuration "Release"
+set_property(TARGET LLVMABI APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
+set_target_properties(LLVMABI PROPERTIES
+  IMPORTED_LINK_INTERFACE_LANGUAGES_RELEASE "CXX"
+  IMPORTED_LOCATION_RELEASE "${_IMPORT_PREFIX}/lib/libLLVMABI.a"
+  )
+
+list(APPEND _cmake_import_check_targets LLVMABI )
+list(APPEND _cmake_import_check_files_for_LLVMABI "${_IMPORT_PREFIX}/lib/libLLVMABI.a" )
 
 # Import target "LLVMFuzzerCLI" for configuration "Release"
 set_property(TARGET LLVMFuzzerCLI APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
@@ -133,6 +153,16 @@ set_target_properties(LLVMIRReader PROPERTIES
 
 list(APPEND _cmake_import_check_targets LLVMIRReader )
 list(APPEND _cmake_import_check_files_for_LLVMIRReader "${_IMPORT_PREFIX}/lib/libLLVMIRReader.a" )
+
+# Import target "LLVMCAS" for configuration "Release"
+set_property(TARGET LLVMCAS APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
+set_target_properties(LLVMCAS PROPERTIES
+  IMPORTED_LINK_INTERFACE_LANGUAGES_RELEASE "CXX"
+  IMPORTED_LOCATION_RELEASE "${_IMPORT_PREFIX}/lib/libLLVMCAS.a"
+  )
+
+list(APPEND _cmake_import_check_targets LLVMCAS )
+list(APPEND _cmake_import_check_files_for_LLVMCAS "${_IMPORT_PREFIX}/lib/libLLVMCAS.a" )
 
 # Import target "LLVMCGData" for configuration "Release"
 set_property(TARGET LLVMCGData APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
@@ -293,6 +323,16 @@ set_target_properties(LLVMFrontendAtomic PROPERTIES
 
 list(APPEND _cmake_import_check_targets LLVMFrontendAtomic )
 list(APPEND _cmake_import_check_files_for_LLVMFrontendAtomic "${_IMPORT_PREFIX}/lib/libLLVMFrontendAtomic.a" )
+
+# Import target "LLVMFrontendDirective" for configuration "Release"
+set_property(TARGET LLVMFrontendDirective APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
+set_target_properties(LLVMFrontendDirective PROPERTIES
+  IMPORTED_LINK_INTERFACE_LANGUAGES_RELEASE "CXX"
+  IMPORTED_LOCATION_RELEASE "${_IMPORT_PREFIX}/lib/libLLVMFrontendDirective.a"
+  )
+
+list(APPEND _cmake_import_check_targets LLVMFrontendDirective )
+list(APPEND _cmake_import_check_files_for_LLVMFrontendDirective "${_IMPORT_PREFIX}/lib/libLLVMFrontendDirective.a" )
 
 # Import target "LLVMFrontendDriver" for configuration "Release"
 set_property(TARGET LLVMFrontendDriver APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
@@ -474,6 +514,16 @@ set_target_properties(LLVMAnalysis PROPERTIES
 list(APPEND _cmake_import_check_targets LLVMAnalysis )
 list(APPEND _cmake_import_check_files_for_LLVMAnalysis "${_IMPORT_PREFIX}/lib/libLLVMAnalysis.a" )
 
+# Import target "LLVMDTLTO" for configuration "Release"
+set_property(TARGET LLVMDTLTO APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
+set_target_properties(LLVMDTLTO PROPERTIES
+  IMPORTED_LINK_INTERFACE_LANGUAGES_RELEASE "CXX"
+  IMPORTED_LOCATION_RELEASE "${_IMPORT_PREFIX}/lib/libLLVMDTLTO.a"
+  )
+
+list(APPEND _cmake_import_check_targets LLVMDTLTO )
+list(APPEND _cmake_import_check_files_for_LLVMDTLTO "${_IMPORT_PREFIX}/lib/libLLVMDTLTO.a" )
+
 # Import target "LLVMLTO" for configuration "Release"
 set_property(TARGET LLVMLTO APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
 set_target_properties(LLVMLTO PROPERTIES
@@ -574,6 +624,16 @@ set_target_properties(LLVMRemarks PROPERTIES
 list(APPEND _cmake_import_check_targets LLVMRemarks )
 list(APPEND _cmake_import_check_files_for_LLVMRemarks "${_IMPORT_PREFIX}/lib/libLLVMRemarks.a" )
 
+# Import target "LLVMHTTP" for configuration "Release"
+set_property(TARGET LLVMHTTP APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
+set_target_properties(LLVMHTTP PROPERTIES
+  IMPORTED_LINK_INTERFACE_LANGUAGES_RELEASE "CXX"
+  IMPORTED_LOCATION_RELEASE "${_IMPORT_PREFIX}/lib/libLLVMHTTP.a"
+  )
+
+list(APPEND _cmake_import_check_targets LLVMHTTP )
+list(APPEND _cmake_import_check_files_for_LLVMHTTP "${_IMPORT_PREFIX}/lib/libLLVMHTTP.a" )
+
 # Import target "LLVMDebuginfod" for configuration "Release"
 set_property(TARGET LLVMDebuginfod APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
 set_target_properties(LLVMDebuginfod PROPERTIES
@@ -583,6 +643,16 @@ set_target_properties(LLVMDebuginfod PROPERTIES
 
 list(APPEND _cmake_import_check_targets LLVMDebuginfod )
 list(APPEND _cmake_import_check_files_for_LLVMDebuginfod "${_IMPORT_PREFIX}/lib/libLLVMDebuginfod.a" )
+
+# Import target "LLVMDebugInfoDWARFLowLevel" for configuration "Release"
+set_property(TARGET LLVMDebugInfoDWARFLowLevel APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
+set_target_properties(LLVMDebugInfoDWARFLowLevel PROPERTIES
+  IMPORTED_LINK_INTERFACE_LANGUAGES_RELEASE "CXX"
+  IMPORTED_LOCATION_RELEASE "${_IMPORT_PREFIX}/lib/libLLVMDebugInfoDWARFLowLevel.a"
+  )
+
+list(APPEND _cmake_import_check_targets LLVMDebugInfoDWARFLowLevel )
+list(APPEND _cmake_import_check_files_for_LLVMDebugInfoDWARFLowLevel "${_IMPORT_PREFIX}/lib/libLLVMDebugInfoDWARFLowLevel.a" )
 
 # Import target "LLVMDebugInfoDWARF" for configuration "Release"
 set_property(TARGET LLVMDebugInfoDWARF APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
@@ -663,6 +733,16 @@ set_target_properties(LLVMDebugInfoBTF PROPERTIES
 
 list(APPEND _cmake_import_check_targets LLVMDebugInfoBTF )
 list(APPEND _cmake_import_check_files_for_LLVMDebugInfoBTF "${_IMPORT_PREFIX}/lib/libLLVMDebugInfoBTF.a" )
+
+# Import target "LLVMDWARFCFIChecker" for configuration "Release"
+set_property(TARGET LLVMDWARFCFIChecker APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
+set_target_properties(LLVMDWARFCFIChecker PROPERTIES
+  IMPORTED_LINK_INTERFACE_LANGUAGES_RELEASE "CXX"
+  IMPORTED_LOCATION_RELEASE "${_IMPORT_PREFIX}/lib/libLLVMDWARFCFIChecker.a"
+  )
+
+list(APPEND _cmake_import_check_targets LLVMDWARFCFIChecker )
+list(APPEND _cmake_import_check_files_for_LLVMDWARFCFIChecker "${_IMPORT_PREFIX}/lib/libLLVMDWARFCFIChecker.a" )
 
 # Import target "LLVMDWP" for configuration "Release"
 set_property(TARGET LLVMDWP APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
@@ -774,126 +854,6 @@ set_target_properties(LLVMTarget PROPERTIES
 list(APPEND _cmake_import_check_targets LLVMTarget )
 list(APPEND _cmake_import_check_files_for_LLVMTarget "${_IMPORT_PREFIX}/lib/libLLVMTarget.a" )
 
-# Import target "LLVMX86CodeGen" for configuration "Release"
-set_property(TARGET LLVMX86CodeGen APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
-set_target_properties(LLVMX86CodeGen PROPERTIES
-  IMPORTED_LINK_INTERFACE_LANGUAGES_RELEASE "CXX"
-  IMPORTED_LOCATION_RELEASE "${_IMPORT_PREFIX}/lib/libLLVMX86CodeGen.a"
-  )
-
-list(APPEND _cmake_import_check_targets LLVMX86CodeGen )
-list(APPEND _cmake_import_check_files_for_LLVMX86CodeGen "${_IMPORT_PREFIX}/lib/libLLVMX86CodeGen.a" )
-
-# Import target "LLVMX86AsmParser" for configuration "Release"
-set_property(TARGET LLVMX86AsmParser APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
-set_target_properties(LLVMX86AsmParser PROPERTIES
-  IMPORTED_LINK_INTERFACE_LANGUAGES_RELEASE "CXX"
-  IMPORTED_LOCATION_RELEASE "${_IMPORT_PREFIX}/lib/libLLVMX86AsmParser.a"
-  )
-
-list(APPEND _cmake_import_check_targets LLVMX86AsmParser )
-list(APPEND _cmake_import_check_files_for_LLVMX86AsmParser "${_IMPORT_PREFIX}/lib/libLLVMX86AsmParser.a" )
-
-# Import target "LLVMX86Disassembler" for configuration "Release"
-set_property(TARGET LLVMX86Disassembler APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
-set_target_properties(LLVMX86Disassembler PROPERTIES
-  IMPORTED_LINK_INTERFACE_LANGUAGES_RELEASE "CXX"
-  IMPORTED_LOCATION_RELEASE "${_IMPORT_PREFIX}/lib/libLLVMX86Disassembler.a"
-  )
-
-list(APPEND _cmake_import_check_targets LLVMX86Disassembler )
-list(APPEND _cmake_import_check_files_for_LLVMX86Disassembler "${_IMPORT_PREFIX}/lib/libLLVMX86Disassembler.a" )
-
-# Import target "LLVMX86TargetMCA" for configuration "Release"
-set_property(TARGET LLVMX86TargetMCA APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
-set_target_properties(LLVMX86TargetMCA PROPERTIES
-  IMPORTED_LINK_INTERFACE_LANGUAGES_RELEASE "CXX"
-  IMPORTED_LOCATION_RELEASE "${_IMPORT_PREFIX}/lib/libLLVMX86TargetMCA.a"
-  )
-
-list(APPEND _cmake_import_check_targets LLVMX86TargetMCA )
-list(APPEND _cmake_import_check_files_for_LLVMX86TargetMCA "${_IMPORT_PREFIX}/lib/libLLVMX86TargetMCA.a" )
-
-# Import target "LLVMX86Desc" for configuration "Release"
-set_property(TARGET LLVMX86Desc APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
-set_target_properties(LLVMX86Desc PROPERTIES
-  IMPORTED_LINK_INTERFACE_LANGUAGES_RELEASE "CXX"
-  IMPORTED_LOCATION_RELEASE "${_IMPORT_PREFIX}/lib/libLLVMX86Desc.a"
-  )
-
-list(APPEND _cmake_import_check_targets LLVMX86Desc )
-list(APPEND _cmake_import_check_files_for_LLVMX86Desc "${_IMPORT_PREFIX}/lib/libLLVMX86Desc.a" )
-
-# Import target "LLVMX86Info" for configuration "Release"
-set_property(TARGET LLVMX86Info APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
-set_target_properties(LLVMX86Info PROPERTIES
-  IMPORTED_LINK_INTERFACE_LANGUAGES_RELEASE "CXX"
-  IMPORTED_LOCATION_RELEASE "${_IMPORT_PREFIX}/lib/libLLVMX86Info.a"
-  )
-
-list(APPEND _cmake_import_check_targets LLVMX86Info )
-list(APPEND _cmake_import_check_files_for_LLVMX86Info "${_IMPORT_PREFIX}/lib/libLLVMX86Info.a" )
-
-# Import target "LLVMARMCodeGen" for configuration "Release"
-set_property(TARGET LLVMARMCodeGen APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
-set_target_properties(LLVMARMCodeGen PROPERTIES
-  IMPORTED_LINK_INTERFACE_LANGUAGES_RELEASE "CXX"
-  IMPORTED_LOCATION_RELEASE "${_IMPORT_PREFIX}/lib/libLLVMARMCodeGen.a"
-  )
-
-list(APPEND _cmake_import_check_targets LLVMARMCodeGen )
-list(APPEND _cmake_import_check_files_for_LLVMARMCodeGen "${_IMPORT_PREFIX}/lib/libLLVMARMCodeGen.a" )
-
-# Import target "LLVMARMAsmParser" for configuration "Release"
-set_property(TARGET LLVMARMAsmParser APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
-set_target_properties(LLVMARMAsmParser PROPERTIES
-  IMPORTED_LINK_INTERFACE_LANGUAGES_RELEASE "CXX"
-  IMPORTED_LOCATION_RELEASE "${_IMPORT_PREFIX}/lib/libLLVMARMAsmParser.a"
-  )
-
-list(APPEND _cmake_import_check_targets LLVMARMAsmParser )
-list(APPEND _cmake_import_check_files_for_LLVMARMAsmParser "${_IMPORT_PREFIX}/lib/libLLVMARMAsmParser.a" )
-
-# Import target "LLVMARMDisassembler" for configuration "Release"
-set_property(TARGET LLVMARMDisassembler APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
-set_target_properties(LLVMARMDisassembler PROPERTIES
-  IMPORTED_LINK_INTERFACE_LANGUAGES_RELEASE "CXX"
-  IMPORTED_LOCATION_RELEASE "${_IMPORT_PREFIX}/lib/libLLVMARMDisassembler.a"
-  )
-
-list(APPEND _cmake_import_check_targets LLVMARMDisassembler )
-list(APPEND _cmake_import_check_files_for_LLVMARMDisassembler "${_IMPORT_PREFIX}/lib/libLLVMARMDisassembler.a" )
-
-# Import target "LLVMARMDesc" for configuration "Release"
-set_property(TARGET LLVMARMDesc APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
-set_target_properties(LLVMARMDesc PROPERTIES
-  IMPORTED_LINK_INTERFACE_LANGUAGES_RELEASE "CXX"
-  IMPORTED_LOCATION_RELEASE "${_IMPORT_PREFIX}/lib/libLLVMARMDesc.a"
-  )
-
-list(APPEND _cmake_import_check_targets LLVMARMDesc )
-list(APPEND _cmake_import_check_files_for_LLVMARMDesc "${_IMPORT_PREFIX}/lib/libLLVMARMDesc.a" )
-
-# Import target "LLVMARMInfo" for configuration "Release"
-set_property(TARGET LLVMARMInfo APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
-set_target_properties(LLVMARMInfo PROPERTIES
-  IMPORTED_LINK_INTERFACE_LANGUAGES_RELEASE "CXX"
-  IMPORTED_LOCATION_RELEASE "${_IMPORT_PREFIX}/lib/libLLVMARMInfo.a"
-  )
-
-list(APPEND _cmake_import_check_targets LLVMARMInfo )
-list(APPEND _cmake_import_check_files_for_LLVMARMInfo "${_IMPORT_PREFIX}/lib/libLLVMARMInfo.a" )
-
-# Import target "LLVMARMUtils" for configuration "Release"
-set_property(TARGET LLVMARMUtils APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
-set_target_properties(LLVMARMUtils PROPERTIES
-  IMPORTED_LINK_INTERFACE_LANGUAGES_RELEASE "CXX"
-  IMPORTED_LOCATION_RELEASE "${_IMPORT_PREFIX}/lib/libLLVMARMUtils.a"
-  )
-
-list(APPEND _cmake_import_check_targets LLVMARMUtils )
-list(APPEND _cmake_import_check_files_for_LLVMARMUtils "${_IMPORT_PREFIX}/lib/libLLVMARMUtils.a" )
-
 # Import target "LLVMAArch64CodeGen" for configuration "Release"
 set_property(TARGET LLVMAArch64CodeGen APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
 set_target_properties(LLVMAArch64CodeGen PROPERTIES
@@ -954,66 +914,6 @@ set_target_properties(LLVMAArch64Utils PROPERTIES
 list(APPEND _cmake_import_check_targets LLVMAArch64Utils )
 list(APPEND _cmake_import_check_files_for_LLVMAArch64Utils "${_IMPORT_PREFIX}/lib/libLLVMAArch64Utils.a" )
 
-# Import target "LLVMWebAssemblyCodeGen" for configuration "Release"
-set_property(TARGET LLVMWebAssemblyCodeGen APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
-set_target_properties(LLVMWebAssemblyCodeGen PROPERTIES
-  IMPORTED_LINK_INTERFACE_LANGUAGES_RELEASE "CXX"
-  IMPORTED_LOCATION_RELEASE "${_IMPORT_PREFIX}/lib/libLLVMWebAssemblyCodeGen.a"
-  )
-
-list(APPEND _cmake_import_check_targets LLVMWebAssemblyCodeGen )
-list(APPEND _cmake_import_check_files_for_LLVMWebAssemblyCodeGen "${_IMPORT_PREFIX}/lib/libLLVMWebAssemblyCodeGen.a" )
-
-# Import target "LLVMWebAssemblyAsmParser" for configuration "Release"
-set_property(TARGET LLVMWebAssemblyAsmParser APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
-set_target_properties(LLVMWebAssemblyAsmParser PROPERTIES
-  IMPORTED_LINK_INTERFACE_LANGUAGES_RELEASE "CXX"
-  IMPORTED_LOCATION_RELEASE "${_IMPORT_PREFIX}/lib/libLLVMWebAssemblyAsmParser.a"
-  )
-
-list(APPEND _cmake_import_check_targets LLVMWebAssemblyAsmParser )
-list(APPEND _cmake_import_check_files_for_LLVMWebAssemblyAsmParser "${_IMPORT_PREFIX}/lib/libLLVMWebAssemblyAsmParser.a" )
-
-# Import target "LLVMWebAssemblyDisassembler" for configuration "Release"
-set_property(TARGET LLVMWebAssemblyDisassembler APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
-set_target_properties(LLVMWebAssemblyDisassembler PROPERTIES
-  IMPORTED_LINK_INTERFACE_LANGUAGES_RELEASE "CXX"
-  IMPORTED_LOCATION_RELEASE "${_IMPORT_PREFIX}/lib/libLLVMWebAssemblyDisassembler.a"
-  )
-
-list(APPEND _cmake_import_check_targets LLVMWebAssemblyDisassembler )
-list(APPEND _cmake_import_check_files_for_LLVMWebAssemblyDisassembler "${_IMPORT_PREFIX}/lib/libLLVMWebAssemblyDisassembler.a" )
-
-# Import target "LLVMWebAssemblyDesc" for configuration "Release"
-set_property(TARGET LLVMWebAssemblyDesc APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
-set_target_properties(LLVMWebAssemblyDesc PROPERTIES
-  IMPORTED_LINK_INTERFACE_LANGUAGES_RELEASE "CXX"
-  IMPORTED_LOCATION_RELEASE "${_IMPORT_PREFIX}/lib/libLLVMWebAssemblyDesc.a"
-  )
-
-list(APPEND _cmake_import_check_targets LLVMWebAssemblyDesc )
-list(APPEND _cmake_import_check_files_for_LLVMWebAssemblyDesc "${_IMPORT_PREFIX}/lib/libLLVMWebAssemblyDesc.a" )
-
-# Import target "LLVMWebAssemblyInfo" for configuration "Release"
-set_property(TARGET LLVMWebAssemblyInfo APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
-set_target_properties(LLVMWebAssemblyInfo PROPERTIES
-  IMPORTED_LINK_INTERFACE_LANGUAGES_RELEASE "CXX"
-  IMPORTED_LOCATION_RELEASE "${_IMPORT_PREFIX}/lib/libLLVMWebAssemblyInfo.a"
-  )
-
-list(APPEND _cmake_import_check_targets LLVMWebAssemblyInfo )
-list(APPEND _cmake_import_check_files_for_LLVMWebAssemblyInfo "${_IMPORT_PREFIX}/lib/libLLVMWebAssemblyInfo.a" )
-
-# Import target "LLVMWebAssemblyUtils" for configuration "Release"
-set_property(TARGET LLVMWebAssemblyUtils APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
-set_target_properties(LLVMWebAssemblyUtils PROPERTIES
-  IMPORTED_LINK_INTERFACE_LANGUAGES_RELEASE "CXX"
-  IMPORTED_LOCATION_RELEASE "${_IMPORT_PREFIX}/lib/libLLVMWebAssemblyUtils.a"
-  )
-
-list(APPEND _cmake_import_check_targets LLVMWebAssemblyUtils )
-list(APPEND _cmake_import_check_files_for_LLVMWebAssemblyUtils "${_IMPORT_PREFIX}/lib/libLLVMWebAssemblyUtils.a" )
-
 # Import target "LLVMSandboxIR" for configuration "Release"
 set_property(TARGET LLVMSandboxIR APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
 set_target_properties(LLVMSandboxIR PROPERTIES
@@ -1073,6 +973,16 @@ set_target_properties(LLVMPasses PROPERTIES
 
 list(APPEND _cmake_import_check_targets LLVMPasses )
 list(APPEND _cmake_import_check_files_for_LLVMPasses "${_IMPORT_PREFIX}/lib/libLLVMPasses.a" )
+
+# Import target "LLVMPlugins" for configuration "Release"
+set_property(TARGET LLVMPlugins APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
+set_target_properties(LLVMPlugins PROPERTIES
+  IMPORTED_LINK_INTERFACE_LANGUAGES_RELEASE "CXX"
+  IMPORTED_LOCATION_RELEASE "${_IMPORT_PREFIX}/lib/libLLVMPlugins.a"
+  )
+
+list(APPEND _cmake_import_check_targets LLVMPlugins )
+list(APPEND _cmake_import_check_files_for_LLVMPlugins "${_IMPORT_PREFIX}/lib/libLLVMPlugins.a" )
 
 # Import target "LLVMTargetParser" for configuration "Release"
 set_property(TARGET LLVMTargetParser APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
@@ -1174,6 +1084,16 @@ set_target_properties(LTO PROPERTIES
 list(APPEND _cmake_import_check_targets LTO )
 list(APPEND _cmake_import_check_files_for_LTO "${_IMPORT_PREFIX}/lib/libLTO.so" )
 
+# Import target "LLVMUBAwareInterpreter" for configuration "Release"
+set_property(TARGET LLVMUBAwareInterpreter APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
+set_target_properties(LLVMUBAwareInterpreter PROPERTIES
+  IMPORTED_LINK_INTERFACE_LANGUAGES_RELEASE "CXX"
+  IMPORTED_LOCATION_RELEASE "${_IMPORT_PREFIX}/lib/libLLVMUBAwareInterpreter.a"
+  )
+
+list(APPEND _cmake_import_check_targets LLVMUBAwareInterpreter )
+list(APPEND _cmake_import_check_files_for_LLVMUBAwareInterpreter "${_IMPORT_PREFIX}/lib/libLLVMUBAwareInterpreter.a" )
+
 # Import target "LLVMCFIVerify" for configuration "Release"
 set_property(TARGET LLVMCFIVerify APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
 set_target_properties(LLVMCFIVerify PROPERTIES
@@ -1193,16 +1113,6 @@ set_target_properties(LLVMDiff PROPERTIES
 
 list(APPEND _cmake_import_check_targets LLVMDiff )
 list(APPEND _cmake_import_check_files_for_LLVMDiff "${_IMPORT_PREFIX}/lib/libLLVMDiff.a" )
-
-# Import target "LLVMExegesisX86" for configuration "Release"
-set_property(TARGET LLVMExegesisX86 APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
-set_target_properties(LLVMExegesisX86 PROPERTIES
-  IMPORTED_LINK_INTERFACE_LANGUAGES_RELEASE "CXX"
-  IMPORTED_LOCATION_RELEASE "${_IMPORT_PREFIX}/lib/libLLVMExegesisX86.a"
-  )
-
-list(APPEND _cmake_import_check_targets LLVMExegesisX86 )
-list(APPEND _cmake_import_check_files_for_LLVMExegesisX86 "${_IMPORT_PREFIX}/lib/libLLVMExegesisX86.a" )
 
 # Import target "LLVMExegesisAArch64" for configuration "Release"
 set_property(TARGET LLVMExegesisAArch64 APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)

@@ -106,9 +106,11 @@ elsif ($hostOS eq "Linux")
 
         if ($bits eq "32")
         {
+            $ENV{"TARGET_ARCH"}     = "-march=armv7-a -mfpu=vfpv3-d16 -mfloat-abi=hard";
+
             # 32 bit OS, even though processor reported as aarch64 - can happen on raspberry pi for example
             $architecture = "arm32";
-            $cmakeExtraArgs = "-DLLVM_TARGET_ARCH=ARM -DLLVM_DEFAULT_TARGET_TRIPLE=armv7l-linux-gnueabihf";
+            $cmakeExtraArgs = "-DCMAKE_CROSSCOMPILING=True -DLLVM_TARGET_ARCH=ARM -DLLVM_DEFAULT_TARGET_TRIPLE=armv7l-linux-gnueabihf -DLLVM_HOST_TRIPLE=armv7l-linux-gnueabihf";
         }
     }
 }
@@ -164,6 +166,7 @@ if ($verbose)
 my $sourceDir    = "${rootDir}/src";
 my $buildDir     = "${rootDir}/build/${platform}/${architecture}";
 my $releaseDir   = "${rootDir}/release/${platform}/${architecture}";
+my $patchDir     = "${rootDir}/patches";
 
 sub execute ($)
 {
@@ -182,12 +185,55 @@ sub setDir ($)
     chdir $dir;
 }
 
+sub getPatches()
+{
+    return sort glob ("${patchDir}/*.patch");
+}
+
+sub isPatchApplied ($)
+{
+    my ($patch) = @_;
+    return system ("cd ${sourceDir}; git apply --reverse --check ${patch} > /dev/null 2>&1") == 0;
+}
+
+# Undo any applied patches so that git pull/checkout can update the tree
+sub revertPatches()
+{
+    foreach my $patch (reverse getPatches())
+    {
+        if (isPatchApplied ($patch))
+        {
+            execute ("cd ${sourceDir}; git apply --reverse ${patch}");
+        }
+    }
+}
+
+sub applyPatches()
+{
+    foreach my $patch (getPatches())
+    {
+        if (isPatchApplied ($patch))
+        {
+            print "Patch already applied: ${patch}\n";
+        }
+        elsif (system ("cd ${sourceDir}; git apply --check ${patch} > /dev/null 2>&1") == 0)
+        {
+            execute ("cd ${sourceDir}; git apply ${patch}");
+        }
+        else
+        {
+            print "WARNING: patch does not apply to ${llvmBranch}, skipping: ${patch}\n";
+        }
+    }
+}
+
 sub cloneLLVM()
 {
     execute ("mkdir -p ${sourceDir}");
 
     if (-e "${sourceDir}/.git")
     {
+        revertPatches();
         execute ("cd ${sourceDir}; git pull");
     }
     else
@@ -223,8 +269,8 @@ sub buildLLVM()
 
     setDir ("${buildDir}");
 
-    execute ("${cmakePrefix} cmake -G \"${cmakeBuildSystem}\" -DCMAKE_BUILD_TYPE=${buildType} -DLLVM_ENABLE_ZSTD=OFF -DLLVM_ENABLE_ASSERTIONS=${enableAssertions} -DLLVM_ENABLE_RTTI=${enableRTTI} -DLLVM_INCLUDE_EXAMPLES=OFF -DLLVM_INCLUDE_TESTS=OFF -DLLVM_INCLUDE_DOCS=OFF -DLLVM_TARGETS_TO_BUILD=\"${targetsToBuild}\" -DLLVM_ENABLE_PROJECTS=\"${projectsToBuild}\" -DLLVM_ENABLE_TERMINFO=OFF -DLLVM_INSTALL_UTILS=OFF -DLLVM_BUILD_TOOLS=${buildTools} -DCMAKE_INSTALL_PREFIX=${releaseDir} ${cmakeExtraArgs} ${sourceDir}/llvm");
-    execute ("cmake --build . --config ${buildType} --target install");
+    execute ("${cmakePrefix} cmake -G \"${cmakeBuildSystem}\" -DCMAKE_BUILD_TYPE=${buildType} -DLLVM_ENABLE_ZSTD=OFF -DLLVM_ENABLE_ASSERTIONS=${enableAssertions} -DLLVM_ENABLE_RTTI=${enableRTTI} -DLLVM_INCLUDE_EXAMPLES=OFF -DLLVM_INCLUDE_TESTS=OFF -DLLVM_INCLUDE_DOCS=OFF -DLLVM_TARGETS_TO_BUILD=\"${targetsToBuild}\" -DLLVM_ENABLE_PROJECTS=\"${projectsToBuild}\" -DLLVM_ENABLE_TERMINFO=OFF -DLLVM_TOOL_LTO_BUILD=OFF -DLLVM_INSTALL_UTILS=OFF -DLLVM_BUILD_TOOLS=${buildTools} -DCMAKE_INSTALL_PREFIX=${releaseDir} ${cmakeExtraArgs} ${sourceDir}/llvm");
+    execute ("cmake --build . --config ${buildType} --target install -j4");
 }
 
 if (! defined $skipCheckout)
@@ -232,5 +278,6 @@ if (! defined $skipCheckout)
     cloneLLVM();
 }
 
+applyPatches();
 buildLLVM();
 generateCmakePlatforms();

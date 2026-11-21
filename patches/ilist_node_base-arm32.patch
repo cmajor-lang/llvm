@@ -1,0 +1,29 @@
+diff --git a/llvm/include/llvm/ADT/ilist_node_base.h b/llvm/include/llvm/ADT/ilist_node_base.h
+index 937e7d060e48..1e5903bf2084 100644
+--- a/llvm/include/llvm/ADT/ilist_node_base.h
++++ b/llvm/include/llvm/ADT/ilist_node_base.h
+@@ -68,7 +68,7 @@ class ilist_node_base : public ilist_detail::node_base_prevnext<
+                         public ilist_detail::node_base_parent<ParentTy> {};
+ 
+ // Specialization implemented in the core LLVM library.
+-template class LLVM_ABI ilist_node_base<true, void>;
++extern template class LLVM_TEMPLATE_ABI ilist_node_base<true, void>;
+ 
+ } // end namespace llvm
+ 
+diff --git a/llvm/lib/IR/Module.cpp b/llvm/lib/IR/Module.cpp
+index 34e44e26d5db..6ea92b07b37f 100644
+--- a/llvm/lib/IR/Module.cpp
++++ b/llvm/lib/IR/Module.cpp
+@@ -66,6 +66,11 @@ template class LLVM_EXPORT_TEMPLATE llvm::SymbolTableListTraits<GlobalVariable>;
+ template class LLVM_EXPORT_TEMPLATE llvm::SymbolTableListTraits<GlobalAlias>;
+ template class LLVM_EXPORT_TEMPLATE llvm::SymbolTableListTraits<GlobalIFunc>;
+ 
++// Explicit instantiation of the ilist node base declared extern in
++// llvm/ADT/ilist_node_base.h. This must live in exactly one TU: on ARM EABI,
++// GCC emits class data for explicit instantiations with strong linkage.
++template class LLVM_EXPORT_TEMPLATE llvm::ilist_node_base<true, void>;
++
+ //===----------------------------------------------------------------------===//
+ // Primitive Module methods.
+ //

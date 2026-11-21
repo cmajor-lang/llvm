@@ -270,7 +270,7 @@ sub buildLLVM()
     setDir ("${buildDir}");
 
     execute ("${cmakePrefix} cmake -G \"${cmakeBuildSystem}\" -DCMAKE_BUILD_TYPE=${buildType} -DLLVM_ENABLE_ZSTD=OFF -DLLVM_ENABLE_ASSERTIONS=${enableAssertions} -DLLVM_ENABLE_RTTI=${enableRTTI} -DLLVM_INCLUDE_EXAMPLES=OFF -DLLVM_INCLUDE_TESTS=OFF -DLLVM_INCLUDE_DOCS=OFF -DLLVM_TARGETS_TO_BUILD=\"${targetsToBuild}\" -DLLVM_ENABLE_PROJECTS=\"${projectsToBuild}\" -DLLVM_ENABLE_TERMINFO=OFF -DLLVM_TOOL_LTO_BUILD=OFF -DLLVM_INSTALL_UTILS=OFF -DLLVM_BUILD_TOOLS=${buildTools} -DCMAKE_INSTALL_PREFIX=${releaseDir} ${cmakeExtraArgs} ${sourceDir}/llvm");
-    execute ("cmake --build . --config ${buildType} --target install -j4");
+    execute ("cmake --build . --config ${buildType} --target install");
 }
 
 if (! defined $skipCheckout)
